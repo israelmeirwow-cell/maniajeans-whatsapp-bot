@@ -1,0 +1,316 @@
+[
+ {
+  "url": "https://example.com/products/d-jean-slim",
+  "category_path": "בגדי גברים / מכנסי ג'ינס",
+  "name": "ג'ינס סלים DEMO",
+  "sku": "D-JEAN-SLIM",
+  "description": "ג'ינס סלים DEMO — פריט דמו סינתטי להדגמת הבוט. חומר איכותי, גזרה נוחה.",
+  "image": "",
+  "price": 199.9,
+  "currency": "ILS",
+  "availability": "in_stock",
+  "colors": [
+   "כחול",
+   "שחור"
+  ],
+  "sizes": [
+   "30",
+   "32",
+   "34",
+   "36",
+   "38"
+  ],
+  "variants": [],
+  "price_min": 199.9,
+  "price_max": 199.9,
+  "on_sale": false
+ },
+ {
+  "url": "https://example.com/products/d-jean-str",
+  "category_path": "בגדי גברים / מכנסי ג'ינס",
+  "name": "ג'ינס גזרה ישרה DEMO",
+  "sku": "D-JEAN-STR",
+  "description": "ג'ינס גזרה ישרה DEMO — פריט דמו סינתטי להדגמת הבוט. חומר איכותי, גזרה נוחה.",
+  "image": "",
+  "price": 219.9,
+  "currency": "ILS",
+  "availability": "in_stock",
+  "colors": [
+   "כחול",
+   "כחול בהיר"
+  ],
+  "sizes": [
+   "30",
+   "32",
+   "34",
+   "36",
+   "38"
+  ],
+  "variants": [],
+  "price_min": 219.9,
+  "price_max": 259.9,
+  "on_sale": true,
+  "price_was": 259.9
+ },
+ {
+  "url": "https://example.com/products/d-jean-skn",
+  "category_path": "בגדי גברים / מכנסי ג'ינס",
+  "name": "ג'ינס סקיני DEMO",
+  "sku": "D-JEAN-SKN",
+  "description": "ג'ינס סקיני DEMO — פריט דמו סינתטי להדגמת הבוט. חומר איכותי, גזרה נוחה.",
+  "image": "",
+  "price": 189.9,
+  "currency": "ILS",
+  "availability": "in_stock",
+  "colors": [
+   "שחור",
+   "כחול"
+  ],
+  "sizes": [
+   "30",
+   "32",
+   "34",
+   "36",
+   "38"
+  ],
+  "variants": [],
+  "price_min": 189.9,
+  "price_max": 189.9,
+  "on_sale": false
+ },
+ {
+  "url": "https://example.com/products/d-shirt-btn",
+  "category_path": "בגדי גברים / חולצות",
+  "name": "חולצה מכופתרת קלאסית DEMO",
+  "sku": "D-SHIRT-BTN",
+  "description": "חולצה מכופתרת קלאסית DEMO — פריט דמו סינתטי להדגמת הבוט. חומר איכותי, גזרה נוחה.",
+  "image": "",
+  "price": 99.9,
+  "currency": "ILS",
+  "availability": "in_stock",
+  "colors": [
+   "לבן",
+   "שחור",
+   "כחול"
+  ],
+  "sizes": [
+   "S",
+   "M",
+   "L",
+   "XL",
+   "XXL"
+  ],
+  "variants": [],
+  "price_min": 99.9,
+  "price_max": 149.9,
+  "on_sale": true,
+  "price_was": 149.9
+ },
+ {
+  "url": "https://example.com/products/d-shirt-mand",
+  "category_path": "בגדי גברים / חולצות",
+  "name": "חולצה מכופתרת צווארון סיני",
+  "sku": "D-SHIRT-MAND",
+  "description": "חולצה מכופתרת צווארון סיני — פריט דמו סינתטי להדגמת הבוט. חומר איכותי, גזרה נוחה.",
+  "image": "",
+  "price": 109.9,
+  "currency": "ILS",
+  "availability": "in_stock",
+  "colors": [
+   "לבן",
+   "שחור"
+  ],
+  "sizes": [
+   "S",
+   "M",
+   "L",
+   "XL",
+   "XXL"
+  ],
+  "variants": [],
+  "price_min": 109.9,
+  "price_max": 109.9,
+  "on_sale": false
+ },
+ {
+  "url": "https://example.com/products/d-tee-basic",
+  "category_path": "בגדי גברים / חולצות",
+  "name": "חולצת טי בייסיק DEMO",
+  "sku": "D-TEE-BASIC",
+  "description": "חולצת טי בייסיק DEMO — פריט דמו סינתטי להדגמת הבוט. חומר איכותי, גזרה נוחה.",
+  "image": "",
+  "price": 49.9,
+  "currency": "ILS",
+  "availability": "in_stock",
+  "colors": [
+   "לבן",
+   "שחור",
+   "אפור"
+  ],
+  "sizes": [
+   "S",
+   "M",
+   "L",
+   "XL",
+   "XXL"
+  ],
+  "variants": [],
+  "price_min": 49.9,
+  "price_max": 49.9,
+  "on_sale": false
+ },
+ {
+  "url": "https://example.com/products/d-polo",
+  "category_path": "בגדי גברים / חולצות",
+  "name": "חולצת פולו DEMO",
+  "sku": "D-POLO",
+  "description": "חולצת פולו DEMO — פריט דמו סינתטי להדגמת הבוט. חומר איכותי, גזרה נוחה.",
+  "image": "",
+  "price": 79.9,
+  "currency": "ILS",
+  "availability": "in_stock",
+  "colors": [
+   "כחול",
+   "לבן",
+   "אפור"
+  ],
+  "sizes": [
+   "S",
+   "M",
+   "L",
+   "XL",
+   "XXL"
+  ],
+  "variants": [],
+  "price_min": 79.9,
+  "price_max": 79.9,
+  "on_sale": false
+ },
+ {
+  "url": "https://example.com/products/d-sneak-wht",
+  "category_path": "בגדי גברים / נעליים",
+  "name": "נעלי סניקרס DEMO",
+  "sku": "D-SNEAK-WHT",
+  "description": "נעלי סניקרס DEMO — פריט דמו סינתטי להדגמת הבוט. חומר איכותי, גזרה נוחה.",
+  "image": "",
+  "price": 199.9,
+  "currency": "ILS",
+  "availability": "in_stock",
+  "colors": [
+   "לבן",
+   "שחור"
+  ],
+  "sizes": [
+   "41",
+   "42",
+   "43",
+   "44",
+   "45"
+  ],
+  "variants": [],
+  "price_min": 199.9,
+  "price_max": 249.9,
+  "on_sale": true,
+  "price_was": 249.9
+ },
+ {
+  "url": "https://example.com/products/d-shoe-lthr",
+  "category_path": "בגדי גברים / נעליים",
+  "name": "נעלי עור DEMO",
+  "sku": "D-SHOE-LTHR",
+  "description": "נעלי עור DEMO — פריט דמו סינתטי להדגמת הבוט. חומר איכותי, גזרה נוחה.",
+  "image": "",
+  "price": 259.9,
+  "currency": "ILS",
+  "availability": "in_stock",
+  "colors": [
+   "שחור"
+  ],
+  "sizes": [
+   "41",
+   "42",
+   "43",
+   "44",
+   "45"
+  ],
+  "variants": [],
+  "price_min": 259.9,
+  "price_max": 259.9,
+  "on_sale": false
+ },
+ {
+  "url": "https://example.com/products/d-belt",
+  "category_path": "בגדי גברים / אביזרים",
+  "name": "חגורת עור DEMO",
+  "sku": "D-BELT",
+  "description": "חגורת עור DEMO — פריט דמו סינתטי להדגמת הבוט. חומר איכותי, גזרה נוחה.",
+  "image": "",
+  "price": 69.9,
+  "currency": "ILS",
+  "availability": "in_stock",
+  "colors": [
+   "שחור",
+   "חום"
+  ],
+  "sizes": [
+   "ONE"
+  ],
+  "variants": [],
+  "price_min": 69.9,
+  "price_max": 69.9,
+  "on_sale": false
+ },
+ {
+  "url": "https://example.com/products/d-jacket",
+  "category_path": "בגדי גברים / מעילים",
+  "name": "ג'קט ג'ינס DEMO",
+  "sku": "D-JACKET",
+  "description": "ג'קט ג'ינס DEMO — פריט דמו סינתטי להדגמת הבוט. חומר איכותי, גזרה נוחה.",
+  "image": "",
+  "price": 279.9,
+  "currency": "ILS",
+  "availability": "in_stock",
+  "colors": [
+   "כחול",
+   "שחור"
+  ],
+  "sizes": [
+   "S",
+   "M",
+   "L",
+   "XL",
+   "XXL"
+  ],
+  "variants": [],
+  "price_min": 279.9,
+  "price_max": 329.9,
+  "on_sale": true,
+  "price_was": 329.9
+ },
+ {
+  "url": "https://example.com/products/d-shorts",
+  "category_path": "בגדי גברים / מכנסיים קצרים",
+  "name": "ברמודה ג'ינס DEMO",
+  "sku": "D-SHORTS",
+  "description": "ברמודה ג'ינס DEMO — פריט דמו סינתטי להדגמת הבוט. חומר איכותי, גזרה נוחה.",
+  "image": "",
+  "price": 129.9,
+  "currency": "ILS",
+  "availability": "in_stock",
+  "colors": [
+   "כחול",
+   "שחור"
+  ],
+  "sizes": [
+   "30",
+   "32",
+   "34",
+   "36",
+   "38"
+  ],
+  "variants": [],
+  "price_min": 129.9,
+  "price_max": 129.9,
+  "on_sale": false
+ }
+]

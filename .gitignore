@@ -1,0 +1,30 @@
+# secrets
+.env
+.env.local
+
+# python
+.venv/
+__pycache__/
+*.pyc
+
+# runtime data & generated artifacts (not for the public repo)
+data/logs/
+data/learning/
+data/cache/
+data/reports/
+data/wa_qr.png
+
+# customer PII (long-term memory built from real chats)
+data/memory/
+
+# REAL scraped store data — the public repo ships synthetic data/store/*.sample.* instead.
+# These stay on the owner's machine; the app falls back to the .sample twins when absent.
+data/store/catalog.json
+data/store/branches.json
+data/store/color_images.json
+data/store/demo_orders.json
+data/store/policies.md
+data/store/catalog_summary.md
+
+# scratch / scrapers (may contain third-party scraping logic)
+scratchpad/

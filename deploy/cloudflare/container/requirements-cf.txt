@@ -1,0 +1,9 @@
+# Slim server deps for the Cloudflare container (no torch / whisper / sentence-transformers).
+anthropic>=0.97
+fastapi>=0.115
+uvicorn[standard]>=0.30
+pydantic>=2
+httpx>=0.27
+python-multipart>=0.0.9
+numpy>=1.24
+Pillow>=10

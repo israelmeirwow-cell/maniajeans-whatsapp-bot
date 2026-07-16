@@ -1,0 +1,4 @@
+from app.simulator.run import main
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,72 @@
+[
+ {
+  "order_id": "100234",
+  "phone": "050-0000001",
+  "customer_name": "אורח דמו",
+  "status": "בוטל",
+  "items": [
+   "ג'ינס סלים DEMO כחול 32"
+  ],
+  "ordered_at": "2026-07-01",
+  "eta": "2026-07-08",
+  "courier": "DEMO",
+  "tracking": "DEMO-1",
+  "total": 199.9
+ },
+ {
+  "order_id": "100235",
+  "phone": "050-0000002",
+  "customer_name": "מאיה דמו",
+  "status": "הועבר לשילוח",
+  "items": [
+   "חולצה מכופתרת קלאסית DEMO לבן L"
+  ],
+  "ordered_at": "2026-07-08",
+  "eta": "2026-07-15",
+  "courier": "DEMO",
+  "tracking": "DEMO-2",
+  "total": 99.9
+ },
+ {
+  "order_id": "100236",
+  "phone": "050-0000003",
+  "customer_name": "יוסי דמו",
+  "status": "מוכן לאיסוף",
+  "items": [
+   "נעלי עור DEMO שחור 43"
+  ],
+  "ordered_at": "2026-07-10",
+  "eta": "2026-07-14",
+  "courier": "DEMO",
+  "tracking": "DEMO-3",
+  "total": 259.9
+ },
+ {
+  "order_id": "100237",
+  "phone": "050-0000004",
+  "customer_name": "דנה דמו",
+  "status": "באיחור",
+  "items": [
+   "ג'קט ג'ינס DEMO כחול M"
+  ],
+  "ordered_at": "2026-06-20",
+  "eta": "2026-06-30",
+  "courier": "DEMO",
+  "tracking": "DEMO-4",
+  "total": 279.9
+ },
+ {
+  "order_id": "100238",
+  "phone": "050-0000005",
+  "customer_name": "רון דמו",
+  "status": "אבוד",
+  "items": [
+   "חגורת עור DEMO שחור"
+  ],
+  "ordered_at": "2026-06-15",
+  "eta": "2026-06-25",
+  "courier": "DEMO",
+  "tracking": "DEMO-5",
+  "total": 69.9
+ }
+]

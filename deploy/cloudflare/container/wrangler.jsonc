@@ -1,0 +1,21 @@
+// Deploy (from the PROJECT ROOT, so the Docker build sees app/ and data/):
+//   npx wrangler deploy -c deploy/cloudflare/container/wrangler.jsonc
+// Then set the secret:
+//   npx wrangler secret put ANTHROPIC_API_KEY -c deploy/cloudflare/container/wrangler.jsonc
+{
+  "name": "maniajeans-bot",
+  "main": "src/index.js",
+  "compatibility_date": "2026-07-01",
+  "containers": [
+    {
+      "class_name": "BotContainer",
+      "image": "./Dockerfile",
+      "instance_type": "basic",      // 1/4 vCPU, 1GiB RAM — enough for the slim build
+      "max_instances": 1             // in-memory sessions => single instance
+    }
+  ],
+  "durable_objects": {
+    "bindings": [{ "name": "BOT", "class_name": "BotContainer" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["BotContainer"] }]
+}

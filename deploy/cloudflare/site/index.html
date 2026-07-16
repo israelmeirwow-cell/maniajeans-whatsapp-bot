@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<script src="config.js"></script>
+<script>const API_BASE = (window.API_BASE || "").replace(/\/+$/, "");</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מאניה ג'ינס — צ'אט שירות</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family:"Segoe UI",Heebo,Arial,sans-serif; }
+  body { background:#e5ddd5; height:100vh; display:flex; flex-direction:column; }
+  header { background:#075e54; color:#fff; padding:14px 20px; display:flex; align-items:center; gap:12px; box-shadow:0 1px 3px rgba(0,0,0,.3); }
+  .avatar { width:42px; height:42px; border-radius:50%; background:#128c7e; display:flex; align-items:center; justify-content:center; font-size:20px; font-weight:700; }
+  header .name { font-weight:600; font-size:16px; }
+  header .status { font-size:12px; opacity:.85; }
+  #chat { flex:1; overflow-y:auto; padding:20px 12%; display:flex; flex-direction:column; gap:8px;
+          background-image:radial-gradient(circle at 1px 1px, rgba(0,0,0,.04) 1px, transparent 0); background-size:22px 22px; }
+  .msg { max-width:75%; padding:9px 13px; border-radius:9px; font-size:14.5px; line-height:1.55; white-space:pre-wrap; box-shadow:0 1px 1px rgba(0,0,0,.12); position:relative; }
+  .user { align-self:flex-start; background:#dcf8c6; border-top-right-radius:0; }
+  .bot  { align-self:flex-end; background:#fff; border-top-left-radius:0; }
+  .meta { font-size:10.5px; color:#999; margin-top:4px; text-align:left; }
+  .typing { align-self:flex-end; background:#fff; padding:12px 18px; border-radius:9px; border-top-left-radius:0; }
+  .typing span { display:inline-block; width:7px; height:7px; margin:0 1.5px; background:#bbb; border-radius:50%; animation:blink 1.2s infinite; }
+  .typing span:nth-child(2){animation-delay:.2s} .typing span:nth-child(3){animation-delay:.4s}
+  @keyframes blink { 0%,80%,100%{opacity:.3} 40%{opacity:1} }
+  footer { background:#f0f0f0; padding:10px 16px; display:flex; gap:10px; }
+  #inp { flex:1; padding:11px 16px; border:none; border-radius:22px; font-size:15px; outline:none; }
+  #send { background:#075e54; color:#fff; border:none; border-radius:50%; width:44px; height:44px; font-size:18px; cursor:pointer; }
+  #send:disabled { opacity:.5; }
+  #attach { background:none; border:none; font-size:22px; cursor:pointer; padding:0 4px; }
+  .msg img { max-width:180px; border-radius:8px; display:block; margin-bottom:4px; }
+  .badge { align-self:center; background:#fdf3c7; color:#856404; font-size:12px; padding:4px 14px; border-radius:12px; margin:4px 0; }
+  .cards { align-self:flex-end; max-width:82%; display:flex; gap:8px; overflow-x:auto; padding:2px 2px 6px; direction:rtl; }
+  .cards::-webkit-scrollbar { height:6px; } .cards::-webkit-scrollbar-thumb { background:#c4c4c4; border-radius:3px; }
+  .card { flex:0 0 134px; background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 1px 2px rgba(0,0,0,.16); text-decoration:none; color:inherit; display:flex; flex-direction:column; transition:transform .12s; }
+  .card:hover { transform:translateY(-2px); }
+  .card img { width:100%; height:158px; object-fit:cover; display:block; background:#f2f2f2; }
+  .card .cname { font-size:12px; line-height:1.35; padding:6px 8px 0; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; min-height:33px; }
+  .card .ccolor { font-size:11.5px; color:#555; padding:2px 8px 0; }
+  .card .cprice { font-size:13.5px; font-weight:700; color:#075e54; padding:3px 8px 8px; }
+  .card .cwas { font-size:11px; color:#c0392b; text-decoration:line-through; font-weight:400; margin-inline-start:5px; }
+  .card .csale { background:#e8474b; color:#fff; font-size:10px; font-weight:700; padding:1px 6px; border-radius:0 0 0 8px; position:absolute; top:0; inset-inline-start:0; }
+  .card { position:relative; }
+</style>
+</head>
+<body>
+<header>
+  <div class="avatar">מ</div>
+  <div>
+    <div class="name">מאניה ג'ינס — שירות לקוחות</div>
+    <div class="status">בוט חכם · מחובר</div>
+  </div>
+</header>
+<div id="chat">
+  <div class="badge">דמו — הבוט מחובר לקטלוג אמיתי של 1,574 מוצרים ו-56 סניפים</div>
+  <div class="msg bot">היי, כאן שירות הלקוחות של מאניה ג'ינס.
+אפשר לשאול אותי על מוצרים ומלאי, סטטוס הזמנה, משלוחים והחזרות, סניפים ושעות.
+איך אפשר לעזור?</div>
+</div>
+<footer>
+  <button id="attach" title="צרף תמונה או הקלטה">📎</button>
+  <input type="file" id="file" accept="image/*,audio/*" style="display:none">
+  <input id="inp" placeholder="הקלד/י הודעה..." autocomplete="off">
+  <button id="send">◀</button>
+</footer>
+<script>
+const chat = document.getElementById("chat");
+const inp = document.getElementById("inp");
+const send = document.getElementById("send");
+const sessionId = "web-" + Math.random().toString(36).slice(2, 8);
+
+function add(cls, text, meta) {
+  const d = document.createElement("div");
+  d.className = "msg " + cls;
+  d.textContent = text;
+  if (meta) {
+    const m = document.createElement("div");
+    m.className = "meta"; m.textContent = meta;
+    d.appendChild(m);
+  }
+  chat.appendChild(d);
+  chat.scrollTop = chat.scrollHeight;
+  return d;
+}
+
+// Real product gallery — hotlinked photos straight from the store catalog.
+function addProducts(list) {
+  if (!list || !list.length) return;
+  const row = document.createElement("div");
+  row.className = "cards";
+  list.forEach(p => {
+    if (!p.image) return;
+    const a = document.createElement("a");
+    a.className = "card";
+    a.href = p.url || "#"; a.target = "_blank"; a.rel = "noopener";
+    const im = document.createElement("img");
+    let src = API_BASE + "/img?u=" + encodeURIComponent(p.image);   // server proxy: reliable, cached photos
+    if (p.image_default && p.image_default !== p.image)
+      src += "&fb=" + encodeURIComponent(p.image_default);  // fall back to the base photo
+    im.src = src;
+    im.alt = p.name || "";
+    im.onerror = () => { im.style.visibility = "hidden"; };  // keep the card, never remove it
+    a.appendChild(im);
+    if (p.on_sale) {
+      const s = document.createElement("div");
+      s.className = "csale"; s.textContent = "מבצע";
+      a.appendChild(s);
+    }
+    const nm = document.createElement("div");
+    nm.className = "cname"; nm.textContent = p.name || "";
+    a.appendChild(nm);
+    if (p.matched_color) {
+      const col = document.createElement("div");
+      col.className = "ccolor";
+      col.textContent = "צבע: " + p.matched_color;
+      a.appendChild(col);
+    }
+    const pr = document.createElement("div");
+    pr.className = "cprice";
+    pr.textContent = (p.price != null ? p.price + "₪" : "");
+    if (p.on_sale && p.price_was && p.price_was > p.price) {
+      const w = document.createElement("span");
+      w.className = "cwas"; w.textContent = p.price_was + "₪";
+      pr.appendChild(w);
+    }
+    a.appendChild(pr);
+    row.appendChild(a);
+  });
+  chat.appendChild(row);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+async function submit() {
+  const text = inp.value.trim();
+  if (!text) return;
+  inp.value = ""; inp.focus(); send.disabled = true;
+  add("user", text);
+  const t = document.createElement("div");
+  t.className = "typing"; t.innerHTML = "<span></span><span></span><span></span>";
+  chat.appendChild(t); chat.scrollTop = chat.scrollHeight;
+  try {
+    const res = await fetch(API_BASE + "/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ session_id: sessionId, message: text }),
+    });
+    const data = await res.json();
+    t.remove();
+    add("bot", data.reply, data.handoff ? "הועבר לנציג אנושי" : "");
+    addProducts(data.products);
+  } catch (e) {
+    t.remove();
+    add("bot", "שגיאת חיבור — ודא שהשרת רץ (uvicorn app.main:app)");
+  }
+  send.disabled = false;
+}
+send.onclick = submit;
+inp.addEventListener("keydown", e => { if (e.key === "Enter") submit(); });
+inp.focus();
+
+// --- media attach (image / voice) ---
+const fileInput = document.getElementById("file");
+document.getElementById("attach").onclick = () => fileInput.click();
+fileInput.onchange = async () => {
+  const f = fileInput.files[0];
+  if (!f) return;
+  const isImage = f.type.startsWith("image/");
+  const bubble = add("user", isImage ? "" : "🎙️ הודעה קולית");
+  if (isImage) {
+    const im = document.createElement("img");
+    im.src = URL.createObjectURL(f);
+    bubble.prepend(im);
+  }
+  const t = document.createElement("div");
+  t.className = "typing"; t.innerHTML = "<span></span><span></span><span></span>";
+  chat.appendChild(t); chat.scrollTop = chat.scrollHeight;
+  const fd = new FormData();
+  fd.append("session_id", sessionId);
+  fd.append("file", f);
+  try {
+    const res = await fetch(API_BASE + (isImage ? "/image" : "/voice"), { method: "POST", body: fd });
+    const data = await res.json();
+    t.remove();
+    if (!isImage && data.transcript) add("user", "תמלול: " + data.transcript, "🎙️→טקסט");
+    add("bot", data.reply, data.handoff ? "הועבר לנציג אנושי" : "");
+    addProducts(data.products);
+  } catch (e) {
+    t.remove();
+    add("bot", "לא הצלחנו לעבד את הקובץ כרגע — אפשר לנסות שוב?");
+  }
+  fileInput.value = "";
+};
+</script>
+</body>
+</html>
