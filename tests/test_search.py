@@ -26,11 +26,14 @@ from app.woocommerce.client import StoreClient
 
 
 def _p(sku, name, category, colors, sizes, price, was=None):
+    # On-sale items carry a variant with `old_price` so StoreClient._compact() can surface
+    # price_was on the card — mirrors the real catalog shape (Greptile review, PR #1).
+    variants = [{"old_price": was}] if was else []
     return {
         "url": f"https://example.com/{sku}", "category_path": f"בגדי גברים / {category}",
         "name": name, "sku": sku, "description": f"{name} — פריט בדיקה.",
         "image": "", "price": price, "currency": "ILS", "availability": "in_stock",
-        "colors": colors, "sizes": sizes, "variants": [],
+        "colors": colors, "sizes": sizes, "variants": variants,
         "price_min": price, "price_max": (was or price), "on_sale": bool(was),
     }
 
@@ -54,12 +57,14 @@ _FIXTURE = [
 @pytest.fixture(scope="module")
 def store():
     """A StoreClient loaded over the controlled fixture catalog above."""
+    # color_images.json is intentionally NOT written here: color_images.py binds its cache
+    # path at import time (before this fixture runs), so a temp copy would never be read
+    # (Greptile review, PR #1). image_for() returns None for these SKUs, which is fine.
     d = Path(tempfile.mkdtemp())
     (d / "catalog.json").write_text(json.dumps(_FIXTURE, ensure_ascii=False), encoding="utf-8")
     (d / "branches.json").write_text("[]", encoding="utf-8")
     (d / "demo_orders.json").write_text("[]", encoding="utf-8")
     (d / "policies.md").write_text("demo", encoding="utf-8")
-    (d / "color_images.json").write_text("{}", encoding="utf-8")
     old = cfg.STORE_DIR
     cfg.STORE_DIR = d                       # store_file() reads this at load time
     try:
@@ -111,3 +116,5 @@ def test_color_filter_still_works(store):
 def test_on_sale_and_price_filters_still_work(store):
     res = store.search_products("חולצה", on_sale=True, max_price=120)
     assert res and all(p["on_sale"] and p["price"] <= 120 for p in res)
+    # on-sale cards must carry the original price (derived from the variant's old_price)
+    assert all(p.get("price_was") and p["price_was"] > p["price"] for p in res)
