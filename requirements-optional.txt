@@ -1,0 +1,17 @@
+# Optional heavy extras for fully-LOCAL machine learning.
+# Both pull in torch (~2 GB) and are NOT required — the bot has working fallbacks for each,
+# so skip these on small servers, CI, or a quick clone. The core install (requirements.txt)
+# runs the whole bot and passes the full test suite without any of this.
+#
+#   install with:  pip install -r requirements-optional.txt
+#   (needs enough RAM to build torch; a memory-capped sandbox will OOM here.)
+
+# Local semantic embeddings for lesson/style retrieval.
+# Fallback without it: keyword matching — or Voyage/OpenAI embeddings if
+# VOYAGE_API_KEY / OPENAI_API_KEY is set (those need no local install).
+sentence-transformers>=2.2
+
+# Local Whisper speech-to-text for WhatsApp voice notes. Also needs ffmpeg on the system.
+# Fallback without it: the OpenAI Whisper API when OPENAI_API_KEY is set
+# (otherwise the bot politely asks the customer to send text instead).
+openai-whisper>=20231117

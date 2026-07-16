@@ -1,3 +1,6 @@
+# Core dependencies — everything the bot, the API, and the full test suite need.
+# Lightweight and fast to install (no torch). Heavy local-ML extras are optional and live
+# in requirements-optional.txt — the bot has working fallbacks for each, so you don't need them.
 anthropic>=0.97
 fastapi>=0.115
 uvicorn[standard]>=0.30
@@ -5,11 +8,6 @@ pydantic>=2
 httpx>=0.27
 python-multipart>=0.0.9
 numpy>=1.24
-# Local embeddings for semantic lesson retrieval (optional; Voyage/OpenAI used instead if keyed)
-sentence-transformers>=2.2
-# Speech-to-text for voice notes (local Whisper). Needs ffmpeg on the system.
-# OpenAI Whisper API is used instead if OPENAI_API_KEY is set. Vision uses Claude (no extra dep).
-openai-whisper>=20231117
 # Image normalization for vision (resize/re-encode any upload to JPEG)
 Pillow>=10
 # optional: pillow-heif  # enables iPhone HEIC uploads

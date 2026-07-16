@@ -14,11 +14,17 @@ and discounts. See [CLAUDE.md](CLAUDE.md) for the full design and the 7-intent s
 
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
+pip install -r requirements.txt              # lightweight core — no torch
 export ANTHROPIC_API_KEY=sk-ant-...          # or put it in .env
 python3 -m uvicorn app.main:app --port 8123  # → http://localhost:8123 (chat) + /dashboard
 python3 -m pytest tests/ -q                  # 43 tests
 ```
+
+**Optional local-ML extras** (`requirements-optional.txt`) add local semantic-embedding
+retrieval and local Whisper voice-note transcription. They pull in torch (~2 GB) and are
+**not** required — the bot has working fallbacks (keyword retrieval; OpenAI Whisper API via
+`OPENAI_API_KEY`). Install only if you want them, on a machine with enough RAM:
+`pip install -r requirements-optional.txt`.
 
 ## Run
 
